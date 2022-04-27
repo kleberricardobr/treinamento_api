@@ -1,2 +1,2 @@
 # treinamento_api
-Treinamento API  Golang - Eletro
+Treinamento API  Golang - Eletrô
