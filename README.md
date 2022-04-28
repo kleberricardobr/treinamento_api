@@ -12,4 +12,4 @@ Por fim, também foi criada uma rota, a qual quando acionada, consultará uma AP
 Requisitos: 
  - GoLang
  - PostgresSQL
- - *A base de dados utilizada para testes, possui duas tabelas simples (sem primary key, foreign key, indíces, etc) - restaurar o backup disponível no arquivo api_backup
+ - *A base de dados utilizada para testes possui duas tabelas simples (sem primary key, foreign key, indíces, etc) - restaurar o backup disponível no arquivo api_backup
