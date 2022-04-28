@@ -8,3 +8,8 @@ Para a manipulação do banco de dados, utilizou-se a biblioteca sqlx (https://g
 Neste primeiro momento do treinamento ainda não utizamos dos recursos de ponteiros, o quais, segundo as boas práticas, recomendam-se sua utilização.
 
 Por fim, também foi criada uma rota, a qual quando acionada, consultará uma API pública, afim de exemplificar não apenas a disponibilização de EndPoints, mas também, o consumo de API de terceiros. 
+
+Requisitos: 
+ - GoLang
+ - PostgresSQL
+ - *A base de dados utilizada para testes, possui duas tabelas simples (sem primary key, foreign key, indíces, etc) - restaurar o backup disponível no arquivo api_backup
