@@ -28,6 +28,15 @@ func GetRoutes() {
 	router.HandleFunc("/GET_TO_DO_ALL/{QTD}",
 		middleware.ValidateRequestKey(http.HandlerFunc(controller.GetAllToDo))).Methods("GET")
 
+	router.HandleFunc("/CAD_TO_DO",
+		middleware.ValidateRequestKey(http.HandlerFunc(controller.CadToDo))).Methods("POST")
+
+	router.HandleFunc("/DATA_HORA/{LOCAL1}/{LOCAL2}",
+		middleware.ValidateRequestKey(http.HandlerFunc(controller.GetDataHora))).Methods("GET")
+
+	router.HandleFunc("/TIME_ZONES",
+		middleware.ValidateRequestKey(http.HandlerFunc(controller.GetTimeZones))).Methods("GET")
+
 	log.Printf("--->>>Aguardando requisições na Porta %s<<<---", lsPorta)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", lsPorta), router))
 }

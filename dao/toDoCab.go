@@ -73,3 +73,35 @@ func GetAllToDo(pQtd int) (ret models.AllToDoList, err error) {
 	return
 
 }
+
+func CadToDo(toDo models.ToDoList) (err error) {
+	tx, err := database.DB.Begin()
+	if err != nil {
+		return
+	}
+
+	var idToDo int
+	err = tx.QueryRow(`insert into to_do_cab(id_do, descricao, datahora)
+	                   values(nextval('sequence_to_do_id'), $1, $2)
+					   returning id_do`, toDo.Cab.Descricao, toDo.Cab.DataHora).Scan(&idToDo)
+	if err != nil {
+		tx.Rollback()
+		return
+	}
+
+	for _, it := range toDo.It {
+		_, err = tx.Exec(`insert into to_do_it(descricao, prioridade, id_do)
+		                  values($1, $2, $3)`, it.Descricao, it.Prioridade, idToDo)
+
+		if err != nil {
+			tx.Rollback()
+			return
+		}
+
+	}
+
+	tx.Commit()
+
+	return nil
+
+}

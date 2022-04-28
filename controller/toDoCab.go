@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"treinamento-api/dao"
+	"treinamento-api/models"
 
 	"github.com/gorilla/mux"
 )
@@ -55,9 +56,29 @@ func GetAllToDo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ret, err := json.Marshal(toDoList)
+	if HasError(w, r, http.StatusInternalServerError, "Falha ao converter dados para JSon - ToDoList(All)", err) {
+		return
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(ret)
+}
 
+func CadToDo(w http.ResponseWriter, r *http.Request) {
+	var toDo models.ToDoList
+
+	err := json.NewDecoder(r.Body).Decode(&toDo)
+	if HasError(w, r, http.StatusBadRequest, "Falha ao recuperar JSon", err) {
+		return
+	}
+
+	err = dao.CadToDo(toDo)
+	if HasError(w, r, http.StatusInternalServerError, "Falha ao cadastrar ToDo", err) {
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"resposta": "Nova lista ToDo cadastrada com sucesso!"}`))
 }
