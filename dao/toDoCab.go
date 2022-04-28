@@ -105,3 +105,29 @@ func CadToDo(toDo models.ToDoList) (err error) {
 	return nil
 
 }
+
+func AtualizaCab(toDoCab models.ToDoId) (err error) {
+
+	if toDoCab.Id == 0 {
+		err = fmt.Errorf("Nenhum id informado")
+		return
+	}
+
+	if toDoCab.Descricao != "" {
+		_, err = database.DB.Exec(`update to_do_cab
+	                               set descricao = $1
+							  	 where id_do = $2`, toDoCab.Descricao, toDoCab.Id)
+	}
+
+	if err != nil {
+		return
+	}
+
+	if toDoCab.DataHora != "" {
+		_, err = database.DB.Exec(`update to_do_cab
+	                               set datahora = $1
+						 	  	 where id_do = $2`, toDoCab.DataHora, toDoCab.Id)
+	}
+
+	return
+}

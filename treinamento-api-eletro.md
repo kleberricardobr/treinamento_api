@@ -7,10 +7,40 @@
     - Neste link estão disponíveis todos os comandos disponíveis para construção de aplicativos de desktop e servidor, por meio da comunicação com a API do Windows
 
 ->>API Rest ou API RESTFul
- - Assim como toda API, possui o objetivo de possibilitar a interoperabilidade entre sistema, porém este é um modelo que se baseia em requisições HTTP.
+ - Assim como toda API, possui o objetivo de possibilitar a interoperabilidade entre sistemas, porém este é um modelo que se baseia em requisições HTTP.
  Este modelo de API leva em consideração a Separação das Responsabilidades (Cliente x Servidor)
 
-https://blog.betrybe.com/desenvolvimento-web/api-rest-tudo-sobre/#1
 
-https://www.techtudo.com.br/listas/2020/06/o-que-e-api-e-para-que-serve-cinco-perguntas-e-respostas.ghtml   
+
+
+https://github.com/kleberricardobr/treinamento_api
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

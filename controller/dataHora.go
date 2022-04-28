@@ -14,6 +14,7 @@ const END_POINT = "http://worldtimeapi.org/api/timezone/"
 
 type response struct {
 	DateTime string `json:"datetime"`
+	TimeZone string `json:"timezone"`
 }
 
 func GetDataHora(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +35,7 @@ func GetDataHora(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(responseData, &responseJson)
 
 	log.Printf(`Data e Hora Recuperados %s`, responseJson.DateTime)
+	log.Printf(`TimeZone Recuperado %s`, responseJson.TimeZone)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

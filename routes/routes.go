@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"treinamento-api/controller"
 	"treinamento-api/middleware"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func routeDefault(w http.ResponseWriter, r *http.Request) {
@@ -16,9 +18,17 @@ func routeDefault(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"resposta": "Conectado!"}`))
 }
 
+func GetListenPort() (ret string) {
+	if err := godotenv.Load(); err != nil {
+		log.Fatalf("Falha ao carregar as váriaveis de conexão %v", err)
+	}
+
+	return os.Getenv("LISTEN_PORT")
+}
+
 func GetRoutes() {
 	router := mux.NewRouter()
-	lsPorta := "9898"
+	lsPorta := GetListenPort()
 
 	router.HandleFunc("/", middleware.ValidateRequestKey(http.HandlerFunc(routeDefault))).Methods("GET")
 
@@ -36,6 +46,9 @@ func GetRoutes() {
 
 	router.HandleFunc("/TIME_ZONES",
 		middleware.ValidateRequestKey(http.HandlerFunc(controller.GetTimeZones))).Methods("GET")
+
+	router.HandleFunc("/ATU_CAB",
+		middleware.ValidateRequestKey(http.HandlerFunc(controller.AtualizaCab))).Methods("PUT")
 
 	log.Printf("--->>>Aguardando requisições na Porta %s<<<---", lsPorta)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", lsPorta), router))

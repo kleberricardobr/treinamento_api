@@ -13,3 +13,9 @@ type ToDoList struct {
 type AllToDoList struct {
 	All []ToDoList `json:"lista_to_do"`
 }
+
+type ToDoId struct {
+	Id        int    `db:"id_do" json:"id_do"`
+	Descricao string `db:"descricao" json:"descricao"`
+	DataHora  string `db:"datahora" json:"datahora"`
+}
